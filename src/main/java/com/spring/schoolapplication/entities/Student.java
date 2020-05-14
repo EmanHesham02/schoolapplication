@@ -14,17 +14,6 @@ public class Student extends Person {
     @OneToMany(mappedBy = "student")
     private Set<CourseRegistration> registrations;
 
-//
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(
-//            name = "Student_course",
-//            joinColumns = {@JoinColumn(name = "employee_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "project_id")}
-//    )
-//    Set<Course> courses = new HashSet<>();
-
-
-
     public int getLevel() {
         return level;
     }

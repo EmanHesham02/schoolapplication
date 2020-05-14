@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Categoty {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -14,7 +14,7 @@ public class Categoty {
     private String categoryName;
 
 
-    @OneToMany(mappedBy = "categoty")
+    @OneToMany(mappedBy = "category")
     private List<Course> course;
 
     public long getId() {

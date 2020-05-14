@@ -1,8 +1,7 @@
 package com.spring.schoolapplication.entities;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -11,6 +10,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     @Column(name = "code")
     private String code;
 
@@ -22,15 +22,10 @@ public class Course {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Categoty categoty;
+    private Category category;
 
     @OneToMany(mappedBy = "course")
     private Set<CourseRegistration> registrations;
-
-
-//    @ManyToMany(mappedBy = "course")
-//    private Set<Student> student = new HashSet<>();
-
 
     @ManyToOne
     @JoinColumn(name = "instructor_id")
@@ -68,12 +63,16 @@ public class Course {
         this.description = description;
     }
 
-    public Categoty getCategoty() {
-        return categoty;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setCategoty(Categoty categoty) {
-        this.categoty = categoty;
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Set<CourseRegistration> getRegistrations() {
