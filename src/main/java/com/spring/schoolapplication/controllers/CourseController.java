@@ -8,29 +8,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/Api")
 public class CourseController {
 
     @Autowired
     CourseService courseService;
 
-    @PostMapping("create")
+    @PostMapping("course")
     public ResponseEntity<Object> createCategory(@RequestBody CourseDto categoryDto) {
         return null;
 
     }
 
-    @GetMapping("/get/{courseId}")
-    public CourseDto getGategory(@PathVariable Long courseId) {
+    @GetMapping("/course/{courseId}")
+    public CourseDto getCourse(@PathVariable Long courseId) {
         CourseDto courseDto;
         courseDto = courseService.getCourseById(courseId);
         return courseDto;
     }
 
-    @GetMapping("/getall")
-    public List<CourseDto> getGategory() {
-        List<CourseDto> categoryDto;
-        categoryDto = courseService.getallCources();
-        return categoryDto;
+    @GetMapping("/course")
+    public List<CourseDto> getAllCourses() {
+        List<CourseDto> courseDto;
+        courseDto = courseService.getallCources();
+        return courseDto;
     }
 }

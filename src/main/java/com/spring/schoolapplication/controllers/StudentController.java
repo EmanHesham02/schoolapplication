@@ -1,15 +1,18 @@
 package com.spring.schoolapplication.controllers;
 
 import com.spring.schoolapplication.dto.StudentDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/Api")
 public class StudentController {
 
 
-    @PostMapping("/create")
-    public StudentDto createStudent(@RequestBody String studentData) {
+    @PostMapping("/student")
+    public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentData) {
+
+        System.out.println(studentData);
         return null;
 
     }
