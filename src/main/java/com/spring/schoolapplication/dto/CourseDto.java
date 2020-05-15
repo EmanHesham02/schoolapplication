@@ -1,5 +1,6 @@
 package com.spring.schoolapplication.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.schoolapplication.entities.Category;
 import com.spring.schoolapplication.entities.CourseRegistration;
 import com.spring.schoolapplication.entities.Instructor;
@@ -12,8 +13,11 @@ public class CourseDto implements Serializable {
     private String code;
     private Integer hour;
     private String description;
+
     private CategoryDto category;
+    @JsonIgnore
     private Set<CourseRegistration> registrationSet;
+    @JsonIgnore
     private Instructor instructor;
 
 

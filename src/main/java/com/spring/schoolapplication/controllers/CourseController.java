@@ -5,6 +5,7 @@ import com.spring.schoolapplication.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -14,9 +15,10 @@ public class CourseController {
     @Autowired
     CourseService courseService;
 
-    @PostMapping("course")
-    public ResponseEntity<Object> createCategory(@RequestBody CourseDto categoryDto) {
-        return null;
+    @PostMapping("/course")
+    public ResponseEntity<Object> createCourse(@RequestBody CourseDto courseDto) {
+        ResponseEntity responseEntity = courseService.createCourse(courseDto);
+        return responseEntity;
 
     }
 
@@ -32,5 +34,11 @@ public class CourseController {
         List<CourseDto> courseDto;
         courseDto = courseService.getallCources();
         return courseDto;
+    }
+
+    @DeleteMapping("/course/{courseId}")
+    public ResponseEntity deleteCourse(@PathVariable(value = "courseId") Long courseId) {
+        ResponseEntity responseEntity = courseService.deleteCourse(courseId);
+        return responseEntity;
     }
 }

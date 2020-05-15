@@ -23,9 +23,9 @@ public class Course {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    ////////////////////////
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
-    @JsonIgnore
     private Category category;
 
     @OneToMany(mappedBy = "course")

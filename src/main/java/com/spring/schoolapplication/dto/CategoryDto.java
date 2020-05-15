@@ -1,5 +1,6 @@
 package com.spring.schoolapplication.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.schoolapplication.entities.Course;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.util.List;
 public class CategoryDto implements Serializable {
     private String categoryName;
 
+    @JsonIgnore
     private List<Course> course;
 
     public String getCategoryName() {
