@@ -1,11 +1,13 @@
 package com.spring.schoolapplication.dto;
+
 import java.io.Serializable;
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
-public class InstructorDto implements Serializable{
+public class InstructorDto implements Serializable {
 
-    private Long personId;
+
     private String name;
     private AddressDto addressDto;
     private Date birthDate;
@@ -14,14 +16,6 @@ public class InstructorDto implements Serializable{
     private String degree;
 
     private List<CourseDto> courseDtos;
-
-    public Long getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Long personId) {
-        this.personId = personId;
-    }
 
     public String getName() {
         return name;
@@ -78,4 +72,5 @@ public class InstructorDto implements Serializable{
     public void setCourseDtos(List<CourseDto> courseDtos) {
         this.courseDtos = courseDtos;
     }
+
 }

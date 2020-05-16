@@ -7,10 +7,21 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CategoryDto implements Serializable {
+
+    private Long id;
+
     private String categoryName;
 
     @JsonIgnore
     private List<Course> course;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCategoryName() {
         return categoryName;

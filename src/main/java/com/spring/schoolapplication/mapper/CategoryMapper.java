@@ -5,14 +5,14 @@ import com.spring.schoolapplication.entities.Category;
 
 public class CategoryMapper {
 
-    public CategoryDto mappingCategoryEntityToCategoryDto(CategoryDto categoryDto, Category category) {
+    public void mappingCategoryEntityToCategoryDto(CategoryDto categoryDto, Category category) {
+        categoryDto.setId(category.getId());
         categoryDto.setCategoryName(category.getCategoryName());
-        return categoryDto;
     }
 
 
-    public Category mappingCtegoryDtoToCategoryEntity(Category category, CategoryDto categoryDto) {
+    public void mappingCtegoryDtoToCategoryEntity(Category category, CategoryDto categoryDto) {
+        categoryDto.setId(category.getId());
         category.setCategoryName(categoryDto.getCategoryName());
-        return category;
     }
 }

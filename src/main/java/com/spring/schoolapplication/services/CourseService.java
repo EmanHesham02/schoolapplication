@@ -7,9 +7,7 @@ import com.spring.schoolapplication.entities.Course;
 import com.spring.schoolapplication.mapper.CourseMapper;
 import com.spring.schoolapplication.repostories.CategoryRepo;
 import com.spring.schoolapplication.repostories.CourseRepo;
-import com.spring.schoolapplication.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +19,10 @@ public class CourseService {
 
     @Autowired
     private CourseRepo courseRepo;
+
+    @Autowired
+    CategoryRepo categoryRepo;
+
     private CourseMapper courseMapper = new CourseMapper();
 
     public CourseDto getCourseById(Long courseId) {
@@ -41,19 +43,26 @@ public class CourseService {
         return courseDtoList;
     }
 
-    public ResponseEntity createCourse(CourseDto courseDto) {
+    public CourseDto createCourse(CourseDto courseDto) {
         Course course = new Course();
+        Category category = categoryRepo.findCategoryById(courseDto.getCategory().getId());
+        course.setCategory(category);
         courseMapper.mappingCourseDtoToCourseEntity(course, courseDto);
         courseRepo.save(course);
-        return CommonUtils.getSuccessResponse();
+        return courseDto;
     }
 
-    public ResponseEntity deleteCourse(Long courseId) {
+    public void deleteCourse(Long courseId) throws Exception {
         Optional<Course> course = courseRepo.findById(courseId);
         if (course.isPresent()) {
             courseRepo.deleteById(courseId);
-            return CommonUtils.getSuccessResponse();
-        }
-        return ResponseEntity.notFound().build();
+        } else throw new Exception("not found");
+    }
+
+    public CourseDto updateCourse(Long courseId, CourseDto courseDto) {
+        Course course = courseRepo.findCourseById(courseId);
+        courseMapper.mappingCourseDtoToCourseEntity(course, courseDto);
+        courseRepo.save(course);
+        return courseDto;
     }
 }

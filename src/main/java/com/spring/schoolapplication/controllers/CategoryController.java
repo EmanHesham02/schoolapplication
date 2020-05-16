@@ -3,6 +3,7 @@ package com.spring.schoolapplication.controllers;
 import com.spring.schoolapplication.dto.CategoryDto;
 import com.spring.schoolapplication.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,35 +18,39 @@ public class CategoryController {
 
     @PostMapping("/category")
     public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
-        ResponseEntity responseEntity = categoryService.createCategory(categoryDto);
-        return responseEntity;
+        CategoryDto categoryDto1 = categoryService.createCategory(categoryDto);
+        return ResponseEntity.ok(categoryDto1);
     }
 
     @GetMapping("/category/{catedoryId}")
-    public CategoryDto getGategory(@PathVariable Long catedoryId) {
+    public ResponseEntity<CategoryDto> getGategory(@PathVariable Long catedoryId) {
         CategoryDto categoryDto;
         categoryDto = categoryService.getCategoryById(catedoryId);
-        return categoryDto;
+        return ResponseEntity.ok(categoryDto);
     }
 
     @GetMapping("/category")
-    public List<CategoryDto> getGategory() {
+    public ResponseEntity<List<CategoryDto>> getGategory() {
         List<CategoryDto> categoryDto;
         categoryDto = categoryService.getallCategory();
-        return categoryDto;
+        return ResponseEntity.ok(categoryDto);
     }
 
     @DeleteMapping("/category/{categoryId}")
-    public ResponseEntity<CategoryDto> deleteCategory(@PathVariable(value = "categoryId") Long catedoryId) {
-        ResponseEntity responseEntity = categoryService.deleteCategoryById(catedoryId);
-        return responseEntity;
+    public ResponseEntity deleteCategory(@PathVariable(value = "categoryId") Long catedoryId) {
+        try {
+            categoryService.deleteCategoryById(catedoryId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
 
     }
 
     @PutMapping("/category/{categoryId}")
     public ResponseEntity<CategoryDto> updateCategory(@PathVariable(value = "categoryId") Long catedoryId,
                                                       @RequestBody CategoryDto categoryDto) {
-        ResponseEntity responseEntity = categoryService.updateCategory(catedoryId, categoryDto);
-        return responseEntity;
+        CategoryDto categoryDto1 = categoryService.updateCategory(catedoryId, categoryDto);
+        return ResponseEntity.ok(categoryDto1);
     }
 }

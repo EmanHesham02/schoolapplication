@@ -4,10 +4,7 @@ import com.spring.schoolapplication.dto.CategoryDto;
 import com.spring.schoolapplication.entities.Category;
 import com.spring.schoolapplication.mapper.CategoryMapper;
 import com.spring.schoolapplication.repostories.CategoryRepo;
-import com.spring.schoolapplication.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,34 +30,32 @@ public class CategoryService {
         List<Category> categoryList = categoryRepo.findAll();
         for (Category category : categoryList) {
             CategoryDto categoryDto = new CategoryDto();
-            categoryDto = categoryMapper.mappingCategoryEntityToCategoryDto(categoryDto, category);
+            categoryMapper.mappingCategoryEntityToCategoryDto(categoryDto, category);
             categoryDtoList.add(categoryDto);
         }
         return categoryDtoList;
     }
 
-    public ResponseEntity createCategory(CategoryDto categoryDto) {
+    public CategoryDto createCategory(CategoryDto categoryDto) {
         Category category = new Category();
         categoryMapper.mappingCtegoryDtoToCategoryEntity(category, categoryDto);
         categoryRepo.save(category);
-        return CommonUtils.getSuccessResponse();
+        categoryDto.setId(category.getId());
+        return categoryDto;
     }
 
-    public ResponseEntity deleteCategoryById(Long catedoryId) {
+    public void deleteCategoryById(Long catedoryId) throws Exception {
         Optional<Category> category = categoryRepo.findById(catedoryId);
         if (category.isPresent()) {
             categoryRepo.deleteById(catedoryId);
-            return CommonUtils.getSuccessResponse();
-        }
-
-        return ResponseEntity.notFound().build();
+        }else throw new Exception("not found");
     }
 
-    public ResponseEntity updateCategory(Long catedoryId, CategoryDto categoryDto) {
+    public CategoryDto updateCategory(Long catedoryId, CategoryDto categoryDto) {
         Category category = categoryRepo.findCategoryById(catedoryId);
         categoryMapper.mappingCtegoryDtoToCategoryEntity(category, categoryDto);
         categoryRepo.save(category);
-        return CommonUtils.getSuccessResponse();
+        return categoryDto;
 
     }
 }

@@ -3,6 +3,7 @@ package com.spring.schoolapplication.controllers;
 import com.spring.schoolapplication.dto.CourseDto;
 import com.spring.schoolapplication.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +17,9 @@ public class CourseController {
     CourseService courseService;
 
     @PostMapping("/course")
-    public ResponseEntity<Object> createCourse(@RequestBody CourseDto courseDto) {
-        ResponseEntity responseEntity = courseService.createCourse(courseDto);
-        return responseEntity;
-
+    public ResponseEntity<CourseDto> createCourse(@RequestBody CourseDto courseDto) {
+        CourseDto courseDto1 = courseService.createCourse(courseDto);
+        return ResponseEntity.ok(courseDto1);
     }
 
     @GetMapping("/course/{courseId}")
@@ -38,7 +38,17 @@ public class CourseController {
 
     @DeleteMapping("/course/{courseId}")
     public ResponseEntity deleteCourse(@PathVariable(value = "courseId") Long courseId) {
-        ResponseEntity responseEntity = courseService.deleteCourse(courseId);
-        return responseEntity;
+        try {
+            courseService.deleteCourse(courseId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
+    }
+
+    @PutMapping("/course/{courseId}")
+    public ResponseEntity<CourseDto> updateCourse(@PathVariable(value = "courseId") Long courseId, @RequestBody CourseDto courseDto) {
+        CourseDto courseDto1 = courseService.updateCourse(courseId,courseDto);
+        return ResponseEntity.ok(courseDto1);
     }
 }

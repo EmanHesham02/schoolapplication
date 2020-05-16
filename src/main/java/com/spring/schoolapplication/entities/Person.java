@@ -1,7 +1,9 @@
 package com.spring.schoolapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 
 @MappedSuperclass
@@ -13,11 +15,11 @@ public class Person {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @Basic
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     @Column(name = "phone_num")

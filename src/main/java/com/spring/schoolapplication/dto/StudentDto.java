@@ -1,16 +1,21 @@
 package com.spring.schoolapplication.dto;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.spring.schoolapplication.entities.CourseRegistration;
 
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
 
 public class StudentDto implements Serializable {
 
     private String name;
     private AddressDto address;
-    private String birthDate;
+    private Date birthDate;
     private String phoneNumber;
     private Integer level;
-    private String registrations;
+    @JsonIgnore
+    private Set<CourseRegistration> registrations;
 
 
     public String getName() {
@@ -21,12 +26,11 @@ public class StudentDto implements Serializable {
         this.name = name;
     }
 
-
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -55,11 +59,11 @@ public class StudentDto implements Serializable {
         this.address = address;
     }
 
-    public String getRegistrations() {
+    public Set<CourseRegistration> getRegistrations() {
         return registrations;
     }
 
-    public void setRegistrations(String registrations) {
+    public void setRegistrations(Set<CourseRegistration> registrations) {
         this.registrations = registrations;
     }
 
