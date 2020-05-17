@@ -8,13 +8,12 @@ import java.util.Date;
 import java.util.Set;
 
 public class StudentDto implements Serializable {
-
     private String name;
     private AddressDto address;
     private Date birthDate;
     private String phoneNumber;
-    private Integer level;
-    @JsonIgnore
+    private Integer level = 1;
+
     private Set<CourseRegistration> registrations;
 
 

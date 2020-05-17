@@ -3,6 +3,7 @@ package com.spring.schoolapplication.services;
 import com.spring.schoolapplication.dto.StudentDto;
 import com.spring.schoolapplication.entities.Address;
 import com.spring.schoolapplication.entities.Student;
+import com.spring.schoolapplication.mapper.AddressMapper;
 import com.spring.schoolapplication.mapper.StudentMapper;
 import com.spring.schoolapplication.repostories.AddressRepo;
 import com.spring.schoolapplication.repostories.StudentRepo;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class StudentService {
     @Autowired
     StudentRepo studentRepo;
+    AddressMapper addressMapper =new AddressMapper();
 
     StudentMapper studentMapper = new StudentMapper();
 
@@ -25,7 +27,7 @@ public class StudentService {
         Student student = new Student();
         Address address = new Address();
         studentMapper.mapStudentDtoToStudentEntity(student, studentDto);
-        studentMapper.mapAddressFromStudentDtoToAddressEntity(address, studentDto);
+        addressMapper.mappingAddressDtoToAddressEntity(studentDto.getAddress(),address);
         student.setAddress(address);
         studentRepo.save(student);
         return studentDto;
@@ -61,7 +63,7 @@ public class StudentService {
     public StudentDto updateStudent(Long studentId, StudentDto studentDto) {
         Student student = studentRepo.findStudentByPersonId(studentId);
         Address address = student.getAddress();
-        studentMapper.mapAddressFromStudentDtoToAddressEntity(address, studentDto);
+        addressMapper.mappingAddressDtoToAddressEntity(studentDto.getAddress(),address);
         studentMapper.mapStudentDtoToStudentEntity(student, studentDto);
         student.setAddress(address);
         studentRepo.save(student);

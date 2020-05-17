@@ -3,6 +3,7 @@ package com.spring.schoolapplication.services;
 import com.spring.schoolapplication.dto.InstructorDto;
 import com.spring.schoolapplication.entities.Address;
 import com.spring.schoolapplication.entities.Instructor;
+import com.spring.schoolapplication.mapper.AddressMapper;
 import com.spring.schoolapplication.mapper.InstructorMapper;
 import com.spring.schoolapplication.repostories.AddressRepo;
 import com.spring.schoolapplication.repostories.InstructorRepo;
@@ -20,12 +21,14 @@ public class InstructorService {
 
     InstructorMapper instructorMapper = new InstructorMapper();
 
+    AddressMapper addressMapper =new AddressMapper();
+
     public InstructorDto createInstructor(InstructorDto instructorDto) {
         Instructor instructor = new Instructor();
         Address address = new Address();
-        instructorMapper.mapInstructorDtoToInstructortEntity(instructor, instructorDto);
-        instructorMapper.mapAddressFromInstructoDtoToAddressEntity(address, instructorDto);
+        addressMapper.mappingAddressDtoToAddressEntity(instructorDto.getAddressDto(),address);
         instructor.setAddress(address);
+        instructorMapper.mapInstructorDtoToInstructortEntity(instructor, instructorDto);
         instructorRepo.save(instructor);
         return instructorDto;
     }
@@ -60,7 +63,7 @@ public class InstructorService {
     public InstructorDto updateInstructor(Long instructorId, InstructorDto instructorDto) {
         Instructor instructor = instructorRepo.findInstructorByPersonId(instructorId);
         Address address =instructor.getAddress();
-        instructorMapper.mapAddressFromInstructorDtoToAddressEntity(address, instructorDto);
+        addressMapper.mappingAddressDtoToAddressEntity(instructorDto.getAddressDto(),address);
         instructorMapper.mapInstructorDtoToInstructortEntity(instructor, instructorDto);
         instructor.setAddress(address);
         instructorRepo.save(instructor);

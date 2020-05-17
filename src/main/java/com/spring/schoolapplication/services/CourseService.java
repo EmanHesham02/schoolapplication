@@ -28,7 +28,7 @@ public class CourseService {
     public CourseDto getCourseById(Long courseId) {
         CourseDto courseDto = new CourseDto();
         Course course = courseRepo.findCourseById(courseId);
-        courseMapper.mappingCourseEntityToCourseDto(courseDto, course);
+        courseMapper.mappingCourseEntityToCourseDto(course, courseDto);
         return courseDto;
     }
 
@@ -37,7 +37,7 @@ public class CourseService {
         List<Course> courseList = courseRepo.findAll();
         for (Course course : courseList) {
             CourseDto courseDto = new CourseDto();
-            courseMapper.mappingCourseEntityToCourseDto(courseDto, course);
+            courseMapper.mappingCourseEntityToCourseDto(course, courseDto);
             courseDtoList.add(courseDto);
         }
         return courseDtoList;
@@ -47,7 +47,7 @@ public class CourseService {
         Course course = new Course();
         Category category = categoryRepo.findCategoryById(courseDto.getCategory().getId());
         course.setCategory(category);
-        courseMapper.mappingCourseDtoToCourseEntity(course, courseDto);
+        courseMapper.mappingCourseDtoToCourseEntity(courseDto, course);
         courseRepo.save(course);
         return courseDto;
     }
@@ -61,8 +61,9 @@ public class CourseService {
 
     public CourseDto updateCourse(Long courseId, CourseDto courseDto) {
         Course course = courseRepo.findCourseById(courseId);
-        courseMapper.mappingCourseDtoToCourseEntity(course, courseDto);
+        courseMapper.mappingCourseDtoToCourseEntity(courseDto, course);
         courseRepo.save(course);
         return courseDto;
     }
+
 }

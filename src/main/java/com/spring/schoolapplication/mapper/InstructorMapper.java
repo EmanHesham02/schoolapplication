@@ -1,11 +1,19 @@
 package com.spring.schoolapplication.mapper;
 
 import com.spring.schoolapplication.dto.AddressDto;
+import com.spring.schoolapplication.dto.CourseDto;
 import com.spring.schoolapplication.dto.InstructorDto;
-import com.spring.schoolapplication.entities.Address;
+import com.spring.schoolapplication.entities.Course;
 import com.spring.schoolapplication.entities.Instructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InstructorMapper {
+
+    AddressMapper addressMapper = new AddressMapper();
+    CourseMapper courseMapper = new CourseMapper();
+
     public void mapInstructorDtoToInstructortEntity(Instructor instructor, InstructorDto instructorDto) {
         instructor.setName(instructorDto.getName());
         instructor.setBirthDate(instructorDto.getBirthDate());
@@ -14,36 +22,29 @@ public class InstructorMapper {
         instructor.setInstructorFaculty(instructorDto.getInstructorFaculty());
     }
 
-    public void mapAddressFromInstructoDtoToAddressEntity(Address address, InstructorDto instructorDto) {
-        address.setStreet(instructorDto.getAddressDto().getStreet());
-        address.setApartmentNum(instructorDto.getAddressDto().getApartmentNum());
-        address.setBuildingNum(instructorDto.getAddressDto().getBuildingNum());
-        address.setCity(instructorDto.getAddressDto().getCity());
-    }
 
     public void mapInstructorEntityToInstructorDto(Instructor instructor, InstructorDto instructorDto) {
-
         AddressDto addressDto = new AddressDto();
-        mapAddressFromInstructorEntityToAddressDto(addressDto, instructor);
+        List<CourseDto> courseDtoList = new ArrayList<>();
+        addressMapper.mappingAddressEntityToAddressDto(instructor.getAddress(), addressDto);
         instructorDto.setName(instructor.getName());
         instructorDto.setBirthDate(instructor.getBirthDate());
         instructorDto.setDegree(instructor.getDegree());
         instructorDto.setPhoneNumber(instructor.getPhoneNumber());
         instructorDto.setAddressDto(addressDto);
         instructorDto.setInstructorFaculty(instructor.getInstructorFaculty());
+        mappingListOfCourseEntityToListOfCourseDto(courseDtoList, instructor.getCourse());
+        instructorDto.setCourseDtos(courseDtoList);
     }
 
-    public void mapAddressFromInstructorEntityToAddressDto(AddressDto addressDto, Instructor instructor) {
-        addressDto.setStreet(instructor.getAddress().getStreet());
-        addressDto.setApartmentNum(instructor.getAddress().getApartmentNum());
-        addressDto.setBuildingNum(instructor.getAddress().getBuildingNum());
-        addressDto.setCity(instructor.getAddress().getCity());
+    public void mappingListOfCourseEntityToListOfCourseDto(List<CourseDto> courseDtoList, List<Course> courseList) {
+
+        for (Course course : courseList) {
+            CourseDto courseDto = new CourseDto();
+            courseMapper.mappingCourseEntityToCourseDto(course, courseDto);
+            courseDtoList.add(courseDto);
+        }
     }
 
-    public void mapAddressFromInstructorDtoToAddressEntity(Address address, InstructorDto instructorDto) {
-        address.setStreet(instructorDto.getAddressDto().getStreet());
-        address.setApartmentNum(instructorDto.getAddressDto().getApartmentNum());
-        address.setBuildingNum(instructorDto.getAddressDto().getBuildingNum());
-        address.setCity(instructorDto.getAddressDto().getCity());
-    }
+
 }

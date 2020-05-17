@@ -14,8 +14,7 @@ public class InstructorDto implements Serializable {
     private String phoneNumber;
     private String instructorFaculty;
     private String degree;
-
-    private List<CourseDto> courseDtos;
+    private List<CourseDto> courses;
 
     public String getName() {
         return name;
@@ -66,11 +65,11 @@ public class InstructorDto implements Serializable {
     }
 
     public List<CourseDto> getCourseDtos() {
-        return courseDtos;
+        return courses;
     }
 
     public void setCourseDtos(List<CourseDto> courseDtos) {
-        this.courseDtos = courseDtos;
+        this.courses = courseDtos;
     }
 
 }
