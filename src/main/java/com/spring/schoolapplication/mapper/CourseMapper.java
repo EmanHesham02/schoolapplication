@@ -15,6 +15,8 @@ public class CourseMapper {
         courseDto.setCategory(categoryDto);
         courseDto.setInstructor(course.getInstructor());
         courseDto.setRegistrationSet(course.getRegistrations());
+        courseDto.setLevel(course.getLevel());
+        courseDto.setPassDegree(course.getPassDegree());
     }
 
     public void mapCategoryDtoFromCourseEntity(CategoryDto categoryDto, Course course) {
@@ -30,5 +32,6 @@ public class CourseMapper {
         course.setInstructor(courseDto.getInstructor());
         course.setRegistrations(courseDto.getRegistrationSet());
         course.setLevel(courseDto.getLevel());
+        course.setPassDegree(courseDto.getPassDegree());
     }
 }

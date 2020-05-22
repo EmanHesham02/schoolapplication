@@ -1,8 +1,7 @@
 package com.spring.schoolapplication.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.spring.schoolapplication.entities.Category;
-import com.spring.schoolapplication.entities.CourseRegistration;
+import com.spring.schoolapplication.entities.Register;
 import com.spring.schoolapplication.entities.Instructor;
 
 import java.io.Serializable;
@@ -11,17 +10,22 @@ import java.util.Set;
 public class CourseDto implements Serializable {
 
     private Long id;
+
     private String code;
+
     private Integer hour;
+
     private String description;
 
     private CategoryDto category;
     @JsonIgnore
-    private Set<CourseRegistration> registrationSet;
+    private Set<Register> registrationSet;
     @JsonIgnore
     private Instructor instructor;
 
     private Integer level;
+
+    private Integer passDegree;
 
 
     public String getCode() {
@@ -56,11 +60,11 @@ public class CourseDto implements Serializable {
         this.category = category;
     }
 
-    public Set<CourseRegistration> getRegistrationSet() {
+    public Set<Register> getRegistrationSet() {
         return registrationSet;
     }
 
-    public void setRegistrationSet(Set<CourseRegistration> registrationSet) {
+    public void setRegistrationSet(Set<Register> registrationSet) {
         this.registrationSet = registrationSet;
     }
 
@@ -86,5 +90,13 @@ public class CourseDto implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getPassDegree() {
+        return passDegree;
+    }
+
+    public void setPassDegree(Integer passDegree) {
+        this.passDegree = passDegree;
     }
 }

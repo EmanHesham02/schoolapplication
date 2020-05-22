@@ -16,7 +16,6 @@ public class Category {
     private String categoryName;
 
     @OneToMany(mappedBy = "category")
-    @JsonIgnore
     private List<Course> course;
 
     public long getId() {

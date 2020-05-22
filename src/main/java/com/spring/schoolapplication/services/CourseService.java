@@ -59,8 +59,8 @@ public class CourseService {
         } else throw new Exception("not found");
     }
 
-    public CourseDto updateCourse(Long courseId, CourseDto courseDto) {
-        Course course = courseRepo.findCourseById(courseId);
+    public CourseDto updateCourse(CourseDto courseDto) {
+        Course course = courseRepo.findCourseById(courseDto.getId());
         courseMapper.mappingCourseDtoToCourseEntity(courseDto, course);
         courseRepo.save(course);
         return courseDto;

@@ -1,20 +1,33 @@
-package com.spring.schoolapplication.dto;
+package com.spring.schoolapplication.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-public class CourseRegisterDto implements Serializable {
-
+@Entity
+public class Register {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long studentDtoId;
-    private Long courseDtoId;
-    @JsonIgnore
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+
+    @Column(name = "registered_at")
     private LocalDateTime registeredAt;
+
+    @Column(name = "grade")
     private Long grade;
-    @JsonIgnore
+
+    @Column(name = "status")
     private Integer status;
+
 
     public Long getId() {
         return id;
@@ -24,20 +37,20 @@ public class CourseRegisterDto implements Serializable {
         this.id = id;
     }
 
-    public Long getStudentDtoId() {
-        return studentDtoId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentDtoId(Long studentDtoId) {
-        this.studentDtoId = studentDtoId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public Long getCourseDtoId() {
-        return courseDtoId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseDtoId(Long courseDtoId) {
-        this.courseDtoId = courseDtoId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public LocalDateTime getRegisteredAt() {

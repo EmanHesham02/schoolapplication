@@ -1,7 +1,7 @@
 package com.spring.schoolapplication.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.spring.schoolapplication.entities.CourseRegistration;
+import com.spring.schoolapplication.entities.Register;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +14,8 @@ public class StudentDto implements Serializable {
     private String phoneNumber;
     private Integer level = 1;
 
-    private Set<CourseRegistration> registrations;
+    @JsonIgnore
+    private Set<Register> registrations;
 
 
     public String getName() {
@@ -58,11 +59,11 @@ public class StudentDto implements Serializable {
         this.address = address;
     }
 
-    public Set<CourseRegistration> getRegistrations() {
+    public Set<Register> getRegistrations() {
         return registrations;
     }
 
-    public void setRegistrations(Set<CourseRegistration> registrations) {
+    public void setRegistrations(Set<Register> registrations) {
         this.registrations = registrations;
     }
 

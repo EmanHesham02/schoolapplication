@@ -1,8 +1,5 @@
 package com.spring.schoolapplication.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
@@ -28,7 +25,7 @@ public class Course {
     private Category category;
 
     @OneToMany(mappedBy = "course")
-    private Set<CourseRegistration> registrations;
+    private Set<Register> registrations;
 
     @ManyToOne
     @JoinColumn(name = "instructor_id")
@@ -36,6 +33,9 @@ public class Course {
 
     @Column(name = "level")
     private Integer level;
+
+    @Column(name = "pass_degree")
+    private Integer passDegree;
 
     public long getId() {
         return id;
@@ -81,11 +81,11 @@ public class Course {
         this.category = category;
     }
 
-    public Set<CourseRegistration> getRegistrations() {
+    public Set<Register> getRegistrations() {
         return registrations;
     }
 
-    public void setRegistrations(Set<CourseRegistration> registrations) {
+    public void setRegistrations(Set<Register> registrations) {
         this.registrations = registrations;
     }
 
@@ -103,5 +103,13 @@ public class Course {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Integer getPassDegree() {
+        return passDegree;
+    }
+
+    public void setPassDegree(Integer passDegree) {
+        this.passDegree = passDegree;
     }
 }

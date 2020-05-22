@@ -3,6 +3,7 @@ package com.spring.schoolapplication.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.schoolapplication.entities.Course;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.List;
 

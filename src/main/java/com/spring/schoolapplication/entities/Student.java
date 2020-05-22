@@ -1,10 +1,6 @@
 package com.spring.schoolapplication.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,7 +10,7 @@ public class Student extends Person {
     private int level = 1;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
-    private Set<CourseRegistration> registrations;
+    private Set<Register> registrations;
 
     public int getLevel() {
         return level;
@@ -24,11 +20,11 @@ public class Student extends Person {
         this.level = level;
     }
 
-    public Set<CourseRegistration> getRegistrations() {
+    public Set<Register> getRegistrations() {
         return registrations;
     }
 
-    public void setRegistrations(Set<CourseRegistration> registrations) {
+    public void setRegistrations(Set<Register> registrations) {
         this.registrations = registrations;
     }
 }
