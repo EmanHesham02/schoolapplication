@@ -1,0 +1,85 @@
+
+{
+ "address": "{
+              "city":"Giza",
+              "street":"abu-elwaffa",
+              "buildingNum":"64",
+              "apartmentNum":"27",
+  }",
+  "name": "eman hesham ahmed",
+  "phoneNumber": "01120934177",
+  "birthDate": "29-oct-1992",
+  "level": 4
+
+}
+
+{
+  "addressDto": {
+    "apartmentNum": "string",
+    "buildingNum": "string",
+    "city": "string",
+    "street": "string"
+  },
+  "birthDate": "string",
+  "level": 0,
+  "name": "string",
+  "personId": 0,
+  "phoneNumber": "string",
+  "registrations": [
+    {
+      "course": {
+        "category": {
+          "categoryName": "string",
+          "course": [
+            null
+          ],
+          "id": 0
+        },
+        "code": "string",
+        "description": "string",
+        "hour": 0,
+        "instructor": {
+          "address": {
+            "apartmentNum": "string",
+            "buildingNum": "string",
+            "city": "string",
+            "id": 0,
+            "street": "string"
+          },
+          "birthDate": "string",
+          "course": [
+            null
+          ],
+          "degree": "string",
+          "instructorFaculty": "string",
+          "name": "string",
+          "personId": 0,
+          "phoneNumber": "string"
+        },
+        "registrations": [
+          null
+        ]
+      },
+      "grade": 0,
+      "id": 0,
+      "registeredAt": "2020-05-13T22:07:19.141Z",
+      "student": {
+        "address": {
+          "apartmentNum": "string",
+          "buildingNum": "string",
+          "city": "string",
+          "id": 0,
+          "street": "string"
+        },
+        "birthDate": "string",
+        "level": 0,
+        "name": "string",
+        "personId": 0,
+        "phoneNumber": "string",
+        "registrations": [
+          null
+        ]
+      }
+    }
+  ]
+}
