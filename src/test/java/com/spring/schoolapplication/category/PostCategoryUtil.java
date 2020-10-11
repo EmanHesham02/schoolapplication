@@ -13,7 +13,6 @@ import static io.restassured.RestAssured.given;
 
 public class PostCategoryUtil {
     String restURL = "http://localhost:8080/Api";
-    RestTemplate restTemplate = new RestTemplate();
 
     public CategoryDto constructCategoryData(DataTable categoryDataTable) {
         Map<String, String> categoryMap = categoryDataTable.asMaps(String.class, String.class).get(0);
@@ -24,7 +23,7 @@ public class PostCategoryUtil {
 
     public Response sendRequest(CategoryDto categoryDto) {
         String restRequest = restURL + "/category";
-       return given().contentType("application/json").body(categoryDto).post(restRequest);
+       return given().contentType(ContentType.JSON).body(categoryDto).post(restRequest);
 
     }
 

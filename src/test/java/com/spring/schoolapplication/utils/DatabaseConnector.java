@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySources;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
+
 public class DatabaseConnector {
     private static DatabaseConnector myInstance = null;
     private static String databaseURL;
@@ -19,6 +20,14 @@ public class DatabaseConnector {
             myInstance = new DatabaseConnector();
         return myInstance;
     }
+
+    public static void setConnectionValues(
+            String databaseURL, String databaseUser, String databasePassword) {
+        DatabaseConnector.databaseURL = databaseURL;
+        DatabaseConnector.databaseUser = databaseUser;
+        DatabaseConnector.databasePassword = databasePassword;
+    }
+
 
     public ResultSet executeQuery(String query) throws Exception {
         PreparedStatement preparedStatement = createPreparedStatement(query);

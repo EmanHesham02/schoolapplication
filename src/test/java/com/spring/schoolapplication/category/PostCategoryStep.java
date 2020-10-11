@@ -3,6 +3,7 @@ package com.spring.schoolapplication.category;
 import com.spring.schoolapplication.dto.CategoryDto;
 import com.spring.schoolapplication.utils.DatabaseConnector;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java8.En;
@@ -17,9 +18,7 @@ import io.restassured.response.Response;
 public class PostCategoryStep implements En {
     private PostCategoryUtil postCategoryUtil;
     protected DatabaseConnector databaseConnector;
-    protected String restURL;
     private CategoryDto categoryDto;
-    Response response;
 
     public PostCategoryStep() {
 
@@ -39,9 +38,23 @@ public class PostCategoryStep implements En {
 
         When("^Admin User post new category with the following value :$", (DataTable categoryDataTable) -> {
             categoryDto = postCategoryUtil.constructCategoryData(categoryDataTable);
-             postCategoryUtil.sendRequest(categoryDto);
+            postCategoryUtil.sendRequest(categoryDto);
 
         });
+
+
+        Then("^the category are added with id \"([^\"]*)\"$", (String expectedLastId) -> {
+            PreparedStatement ps =
+                    databaseConnector.createPreparedStatement(
+                            "Select id from category order by id desc limit 1");
+            ResultSet resultSet = databaseConnector.executeQuery(ps);
+            int lastId = -1;
+            if (resultSet.next()) {
+                lastId = resultSet.getInt("id");
+            }
+            Assert.assertEquals(Integer.parseInt(expectedLastId), lastId);
+        });
+
     }
 
     @Before
